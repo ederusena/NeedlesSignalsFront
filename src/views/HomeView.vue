@@ -4,6 +4,9 @@ import ReactiveFundamentals from '../components/charpterOneEssentials/ReactiveFu
 
 <template>
   <main>
+    <div>
+  {{ html }}
+</div>
     <div>{{ state.count }}</div>
     <button @click="increment" type="button" class="btn">Increment</button>
     <button @click="decrement" type="button" class="btn">Decrement</button>
@@ -35,8 +38,7 @@ export default {
 </script>
 
 <script setup>
-import { reactive } from "vue";
-
+const html = "<p></p>";
 const state = reactive({ count: 0 });
 
 const increment = () => state.count++;
