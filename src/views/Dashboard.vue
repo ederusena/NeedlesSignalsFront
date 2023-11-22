@@ -77,7 +77,7 @@
                 <a
                   v-for="item in navigation"
                   :key="item.name"
-                  :href="item.href"
+                  @click="handleNavigationClick(item.name)"
                   :class="[
                     item.current
                       ? 'bg-indigo-800 text-white'
@@ -359,6 +359,9 @@ const currentComponent = computed(() => {
 const handleNavigationClick = (itemName) => {
   // Atualiza o item de navegação ativo
   activeNavigationItem.value = itemName;
+  navigation.forEach((item) => {
+    item.current = item.name === itemName;
+  });
 
   // Fecha a barra lateral após clicar em um item
   sidebarOpen.value = false;
