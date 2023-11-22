@@ -31,7 +31,7 @@
           <BaseInput
             name="password"
             type="password"
-            label="password"
+            label="Senha"
             v-model="user.password"
           />
           <ErrorMessage name="password" as="p">
