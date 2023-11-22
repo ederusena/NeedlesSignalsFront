@@ -21,12 +21,12 @@ export const useUserStore = defineStore('user', () => {
     return token.value;
   }
 
-  const fullName = computed(() => {
-    return `${firstName.value} ${lastName.value}`;
-  });
+  // const fullName = computed(() => {
+  //   return `${firstName.value} ${lastName.value}`;
+  // });
 
-  async function getUserById() {
-    const { data } = await http.get(`/v1/user/${userId.value}`, {
+  async function getUserById(id) {
+    const { data } = await http.get(`/v1/user/${id.value}`, {
       headers: {
         Authorization: `Bearer ${token.value}`,
       },
@@ -96,7 +96,6 @@ export const useUserStore = defineStore('user', () => {
     user,
     token,
     userId,
-    fullName,
     logout,
     setToken,
     setUserId,
