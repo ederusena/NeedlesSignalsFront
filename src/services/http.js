@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { environment } from '../config';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://startup-one-production.up.railway.app/api',
+  baseURL: environment.baseApiUrl,
   headers: {
     'Content-Type': 'application/json',
   },

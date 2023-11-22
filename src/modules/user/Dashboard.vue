@@ -255,8 +255,8 @@
           </div>
         </div>
 
-        <transition :name="componentTransitionName">
-          <component :is="currentComponent"></component>
+        <transition :name="componentTransitionName" mode="out-in">
+          <component :is="currentComponent" key="componentKey"></component>
         </transition>
 
       </main>
@@ -268,12 +268,12 @@
 import { computed, onMounted, ref } from 'vue';
 import { storeToRefs } from "pinia";
 import { useUserStore } from '@/stores/auth';
-import DashboardComponent from '@/components/Dashboard/DashboardComponent.vue';
-import TeamComponent from '@/components/Dashboard/TeamComponent.vue';
-import ProjectsComponent from '@/components/Dashboard/ProjectsComponent.vue';
-import CalendarComponent from '@/components/Dashboard/CalendarComponent.vue';
-import DocumentsComponent from '@/components/Dashboard/DocumentsComponent.vue';
-import ReportsComponent from '@/components/Dashboard/ReportsComponent.vue';
+import DashboardComponent from '@/modules/user/components/Dashboard/DashboardComponent.vue';
+import TeamComponent from '@/modules/user/components/Dashboard/TeamComponent.vue';
+import ProjectsComponent from '@/modules/user/components/Dashboard/ProjectsComponent.vue';
+import CalendarComponent from '@/modules/user/components/Dashboard/CalendarComponent.vue';
+import DocumentsComponent from '@/modules/user/components/Dashboard/DocumentsComponent.vue';
+import ReportsComponent from '@/modules/user/components/Dashboard/ReportsComponent.vue';
 
 import {
   Dialog,
@@ -334,6 +334,9 @@ const { user, userId } = storeToRefs(userStore);
 //   return `${user.value.firstName} ${user.value.lastName}`;
 // });
 
+const componentKey = ref(0); // Adicione uma chave única para forçar a atualização do componente
+
+
 const activeNavigationItem = ref('Dashboard');
 
 const componentTransitionName = computed(() => {
@@ -359,6 +362,7 @@ const currentComponent = computed(() => {
 const handleNavigationClick = (itemName) => {
   // Atualiza o item de navegação ativo
   activeNavigationItem.value = itemName;
+  componentKey.value += 1;
   navigation.forEach((item) => {
     item.current = item.name === itemName;
   });
