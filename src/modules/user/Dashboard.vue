@@ -197,7 +197,7 @@
                     v-slot="{ active }"
                   >
                     <a
-                      :href="item.href"
+                      @click='handleLogout'
                       :class="[
                         active ? 'bg-gray-100' : '',
                         'block px-4 py-2 text-sm text-gray-700',
@@ -272,6 +272,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { useUserStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import DashboardComponent from '@/modules/user/components/Dashboard/DashboardComponent.vue';
 import FavoriteComponent from '@/modules/user/components/Dashboard/FavoriteComponent.vue';
@@ -310,8 +311,6 @@ const navigation = [
   { name: 'Configuração', href: '#', icon: AdjustmentsIcon, current: false },
 ];
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ];
 
@@ -326,7 +325,7 @@ const periodoDoDia = computed(() => {
     return 'Boa noite';
   }
 });
-
+const router = useRouter();
 const sidebarOpen = ref(false);
 const userStore = useUserStore();
 const { user, userId } = storeToRefs(userStore);
@@ -376,6 +375,11 @@ const handleNavigationClick = (itemName) => {
 // Adicione uma função para redefinir o item de navegação ativo ao clicar fora do componente
 const resetActiveNavigation = () => {
   activeNavigationItem.value = null;
+};
+
+const handleLogout = () => {
+  userStore.logout();
+  router.push({ name: 'Login' });
 };
 
 onMounted(async () => {
