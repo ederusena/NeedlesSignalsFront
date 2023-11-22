@@ -41,7 +41,6 @@ router.beforeEach((to, from, next) => {
     } else {
       next({ name: 'Login' });
     }
-    console.log(to.name);
   } else {
     next();
   }

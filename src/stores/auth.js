@@ -63,11 +63,11 @@ export const useUserStore = defineStore('user', () => {
   async function registration(credentials) {
     const { email, password, name, lastname, cpf } = credentials;
     const { data } = await http.post('/v1/auth/register', {
-      email,
-      password,
-      name,
-      lastname,
-      cpf
+      "email": email,
+      "password": password,
+      "firstName": name,
+      "lastName": lastname,
+      "cpfcnpj": cpf,
     });
 
     if (data) {
