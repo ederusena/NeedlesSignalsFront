@@ -38,6 +38,13 @@ export const useUserStore = defineStore('user', () => {
     return false;
   }
 
+  function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    token.value = null;
+    userId.value = null;
+  }
+
   async function authenticate(credentials) {
     const { email, password } = credentials;
     const { data } = await http.post('/v1/auth/authenticate', {
@@ -72,6 +79,7 @@ export const useUserStore = defineStore('user', () => {
     token,
     userId,
     fullName,
+    logout,
     checkToken,
     setToken,
     setUserId,
