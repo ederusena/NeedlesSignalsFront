@@ -216,21 +216,41 @@
         <!-- Page header -->
         <div class="bg-white shadow">
           <div class="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
-            <div class="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
+            <div
+              class="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200"
+            >
               <div class="flex-1 min-w-0">
                 <!-- Profile -->
                 <div class="flex items-center">
-                  <img class="hidden w-16 h-16 rounded-full sm:block" src="https://images.unsplash.com/photo-1608889175250-c3b0c1667d3a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                  <img
+                    class="hidden w-16 h-16 rounded-full sm:block"
+                    src="https://images.unsplash.com/photo-1608889175250-c3b0c1667d3a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt=""
+                  />
                   <div>
                     <div class="flex items-center">
-                      <img class="w-16 h-16 rounded-full sm:hidden" src="https://images.unsplash.com/photo-1608889175250-c3b0c1667d3a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-                      <h1 class="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">{{periodoDoDia}}, Eder</h1>
+                      <img
+                        class="w-16 h-16 rounded-full sm:hidden"
+                        src="https://images.unsplash.com/photo-1608889175250-c3b0c1667d3a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt=""
+                      />
+                      <h1
+                        class="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate"
+                      >
+                        {{ periodoDoDia }}, Eder
+                      </h1>
                     </div>
-                    <dl class="flex flex-col mt-6 sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
-
+                    <dl
+                      class="flex flex-col mt-6 sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap"
+                    >
                       <dt class="sr-only">Account status</dt>
-                      <dd class="flex items-center mt-3 text-sm font-medium text-gray-500 capitalize sm:mr-6 sm:mt-0">
-                        <CheckCircleIcon class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" aria-hidden="true" />
+                      <dd
+                        class="flex items-center mt-3 text-sm font-medium text-gray-500 capitalize sm:mr-6 sm:mt-0"
+                      >
+                        <CheckCircleIcon
+                          class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
+                          aria-hidden="true"
+                        />
                         Conta verificada
                       </dd>
                     </dl>
@@ -244,7 +264,6 @@
         <transition :name="componentTransitionName" mode="out-in">
           <component :is="currentComponent" key="componentKey"></component>
         </transition>
-
       </main>
     </div>
   </div>
@@ -252,14 +271,13 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import { storeToRefs } from "pinia";
 import { useUserStore } from '@/stores/auth';
+import { storeToRefs } from 'pinia';
 import DashboardComponent from '@/modules/user/components/Dashboard/DashboardComponent.vue';
-import TeamComponent from '@/modules/user/components/Dashboard/TeamComponent.vue';
-import ProjectsComponent from '@/modules/user/components/Dashboard/ProjectsComponent.vue';
-import CalendarComponent from '@/modules/user/components/Dashboard/CalendarComponent.vue';
-import DocumentsComponent from '@/modules/user/components/Dashboard/DocumentsComponent.vue';
-import ReportsComponent from '@/modules/user/components/Dashboard/ReportsComponent.vue';
+import FavoriteComponent from '@/modules/user/components/Dashboard/FavoriteComponent.vue';
+import ProfileComponent from '@/modules/user/components/Dashboard/ProfileComponent.vue';
+import SinaisComponent from '@/modules/user/components/Dashboard/SinaisComponent.vue';
+import ConfigComponent from '@/modules/user/components/Dashboard/ConfigComponent.vue';
 
 import {
   Dialog,
@@ -272,33 +290,30 @@ import {
   TransitionRoot,
 } from '@headlessui/vue';
 import {
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
   XIcon,
+  RssIcon,
+  StarIcon,
+  HomeIcon,
+  BellIcon,
+  UsersIcon,
+  MenuAlt2Icon,
+  AdjustmentsIcon,
   CheckCircleIcon,
 } from '@heroicons/vue/outline';
 import { SearchIcon } from '@heroicons/vue/solid';
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  { name: 'Sinais', href: '#', icon: RssIcon, current: false },
+  { name: 'Favoritos', href: '#', icon: StarIcon, current: false },
+  { name: 'Profile', href: '#', icon: UsersIcon, current: false },
+  { name: 'Configuração', href: '#', icon: AdjustmentsIcon, current: false },
 ];
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ];
-
 
 const horaAtual = new Date().getHours();
 
@@ -312,7 +327,6 @@ const periodoDoDia = computed(() => {
   }
 });
 
-
 const sidebarOpen = ref(false);
 const userStore = useUserStore();
 const { user, userId } = storeToRefs(userStore);
@@ -321,7 +335,6 @@ const { user, userId } = storeToRefs(userStore);
 // });
 
 const componentKey = ref(0); // Adicione uma chave única para forçar a atualização do componente
-
 
 const activeNavigationItem = ref('Dashboard');
 
@@ -334,11 +347,10 @@ const currentComponent = computed(() => {
   // Mapeie os itens de navegação para os componentes correspondentes
   const componentMap = {
     Dashboard: DashboardComponent, // Substitua 'DashboardComponent' pelo nome do seu componente
-    Team: TeamComponent,
-    Projects: ProjectsComponent,
-    Calendar: CalendarComponent,
-    Documents: DocumentsComponent,
-    Reports: ReportsComponent,
+    Sinais: SinaisComponent,
+    Favoritos: FavoriteComponent,
+    Configuração: ConfigComponent,
+    Profile: ProfileComponent,
   };
 
   // Retorna o componente correspondente ao item de navegação ativo
