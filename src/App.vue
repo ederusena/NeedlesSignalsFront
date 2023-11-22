@@ -1,5 +1,4 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
@@ -16,7 +15,7 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </nav>
 </header> -->
-  <div class="mx-auto mt-4 max-w-7xl sm:px-6 lg:px-8">
+  <div>
     <RouterView />
   </div>
 </template>

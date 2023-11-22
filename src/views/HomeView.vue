@@ -5,7 +5,6 @@ import ReactiveFundamentals from '../components/charpterOneEssentials/ReactiveFu
 <template>
   <main>
     <div>
-  {{ html }}
 </div>
     <div>{{ state.count }}</div>
     <button @click="increment" type="button" class="btn">Increment</button>
