@@ -12,13 +12,21 @@
     </div>
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
-        <form class="space-y-6">
+        <Form :validation-schema="schema" class="space-y-6" @submit="onSubmit">
           <BaseInput
             name="email"
             type="email"
             label="Email"
             v-model="user.email"
+            :rules="validateEmail"
           />
+          <ErrorMessage name="email" as="p">
+            <p
+              class="p-2 text-sm font-medium text-red-500 rounded-md bg-red-50"
+            >
+              Por favor digitar um email valido
+            </p>
+          </ErrorMessage>
 
           <BaseInput
             name="password"
@@ -26,6 +34,13 @@
             label="password"
             v-model="user.password"
           />
+          <ErrorMessage name="password" as="p">
+            <p
+              class="p-2 text-sm font-medium text-red-500 rounded-md bg-red-50"
+            >
+              Senha inválida, maior que 8 caracteres
+            </p>
+          </ErrorMessage>
 
           <div class="flex items-center justify-between">
             <div class="flex items-center">
@@ -51,35 +66,37 @@
           </div>
 
           <div class="button-container">
-            <BaseButton label="Entrar" primary @click.prevent="login" />
+            <BaseButton label="Entrar" primary />
 
-            <BaseButton
-              label="Registrar"
-              secondary
-              @click.prevent="registrar"
-            />
+            <BaseButton label="Registrar" secondary @click="registrar" />
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { Form, ErrorMessage } from 'vee-validate';
 import { useUserStore } from '@/stores/auth';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseInput from '@/components/base/BaseInput.vue';
 import BaseButton from '@/components/base/BaseButton.vue';
-
+import * as yup from 'yup';
 const userStore = useUserStore();
 const router = useRouter();
 const user = reactive({
-  email: 'eder_sena@dev.com',
+  email: '',
   password: '12345',
 });
 
-const login = async () => {
+const schema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).required(),
+});
+
+const onSubmit = async () => {
   try {
     const userAuth = await userStore.authenticate(user);
     if (userAuth) {
@@ -93,6 +110,7 @@ const login = async () => {
 const registrar = async () => {
   router.push('/register');
 };
+
 </script>
 
 <style lang="postcss" scoped>

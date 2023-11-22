@@ -4,7 +4,7 @@
       {{ label }}
     </label>
     <div class="mt-1">
-      <input
+      <Field
         :id="name"
         :name="name"
         :type="type"
@@ -18,6 +18,7 @@
 </template>
 
 <script setup>
+import { Field } from 'vee-validate';
 defineProps({
   name: {
     type: String,
