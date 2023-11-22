@@ -87,7 +87,7 @@ import * as yup from 'yup';
 const userStore = useUserStore();
 const router = useRouter();
 const user = reactive({
-  email: '',
+  email: 'eder_sena2@dev.com',
   password: '12345',
 });
 
