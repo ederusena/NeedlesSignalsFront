@@ -13,7 +13,7 @@
     {{ user }}
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6">
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700">
               Email
@@ -75,8 +75,7 @@
 
           <div>
             <button
-              @click="Login"
-              type="submit"
+              @click.prevent="login"
               class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Entrar
@@ -167,19 +166,23 @@
 <script setup>
 import http from '@/services/http';
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter() ;
 const user = reactive({
   email: 'eder_sena@dev.com',
   password: '12345',
 });
 
-async function Login() {
+const login = async () => {
   try {
     const response = await http.post('/auth/authenticate', {
     email: user.email,
     password: user.password,
-  });
+    });
   console.log(response);
+
+  router.push('/dashboard');
   } catch (error) {
     console.log(error?.response?.data);
   }
