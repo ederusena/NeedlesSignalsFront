@@ -237,7 +237,7 @@
                       <h1
                         class="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate"
                       >
-                        {{ periodoDoDia }}, Eder
+                        {{ periodoDoDia }}, {{ fullName }}
                       </h1>
                     </div>
                     <dl
@@ -330,9 +330,13 @@ const periodoDoDia = computed(() => {
 const sidebarOpen = ref(false);
 const userStore = useUserStore();
 const { user, userId } = storeToRefs(userStore);
-// const fullName = computed(() => {
-//   return `${user.value.firstName} ${user.value.lastName}`;
-// });
+const fullName = computed(() => {
+  if (user.value && user.value.firstName && user.value.lastName) {
+    return `${user.value.firstName} ${user.value.lastName}`;
+  } else {
+    return 'Loading...'; // Or any other default value or message
+  }
+});
 
 const componentKey = ref(0); // Adicione uma chave única para forçar a atualização do componente
 
@@ -374,7 +378,8 @@ const resetActiveNavigation = () => {
   activeNavigationItem.value = null;
 };
 
-onMounted(() => {
-  userStore.getUserById(userId);
+onMounted(async () => {
+  const id = localStorage.getItem('userId');
+  await userStore.getUserById(id);
 });
 </script>
