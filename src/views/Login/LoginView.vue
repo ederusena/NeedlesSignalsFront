@@ -13,41 +13,19 @@
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
         <form class="space-y-6">
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <div class="mt-1">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                v-model="user.email"
-                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-          </div>
+          <BaseInput
+            name="email"
+            type="email"
+            label="Email"
+            v-model="user.email"
+          />
 
-          <div>
-            <label
-              for="password"
-              class="block text-sm font-medium text-gray-700"
-            >
-              Senha
-            </label>
-            <div class="mt-1">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                v-model="user.password"
-                autocomplete="current-password"
-                required=""
-                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-          </div>
+          <BaseInput
+            name="password"
+            type="password"
+            label="password"
+            v-model="user.password"
+          />
 
           <div class="flex items-center justify-between">
             <div class="flex items-center">
@@ -72,13 +50,14 @@
             </div>
           </div>
 
-          <div>
-            <button
-              @click.prevent="login"
-              class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Entrar
-            </button>
+          <div class="button-container">
+            <BaseButton label="Entrar" primary @click.prevent="login" />
+
+            <BaseButton
+              label="Registrar"
+              secondary
+              @click.prevent="registrar"
+            />
           </div>
         </form>
       </div>
@@ -90,6 +69,8 @@
 import { useUserStore } from '@/stores/auth';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import BaseInput from '@/components/base/BaseInput.vue';
+import BaseButton from '@/components/base/BaseButton.vue';
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -108,10 +89,14 @@ const login = async () => {
     console.log(error?.response?.data);
   }
 };
+
+const registrar = async () => {
+  router.push('/register');
+};
 </script>
 
 <style lang="postcss" scoped>
-.btn {
-  @apply ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+.button-container {
+  @apply flex md:items-center md:justify-between md:gap-2 md:flex-row flex-col gap-2;
 }
 </style>

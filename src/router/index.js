@@ -11,12 +11,17 @@ const router = createRouter({
       component: () => import('@/views/Login/LoginView.vue'),
     },
     {
+      path: '/register',
+      name: 'Register',
+      component: () => import('@/views/Login/RegisterView.vue'),
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('@/views/Dashboard.vue'),
       meta: {
         auth: true,
-      }
+      },
     },
   ],
 });

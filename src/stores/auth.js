@@ -60,6 +60,24 @@ export const useUserStore = defineStore('user', () => {
     return false;
   }
 
+  async function registration(credentials) {
+    const { email, password, name, lastname, cpf } = credentials;
+    const { data } = await http.post('/v1/auth/register', {
+      email,
+      password,
+      name,
+      lastname,
+      cpf
+    });
+
+    if (data) {
+      setToken(data.token);
+      setUserId(data.userId);
+      return true;
+    }
+    return false;
+  }
+
   async function checkToken() {
     try {
       // const tokenAuth = `Bearer ${token}`;
@@ -80,11 +98,12 @@ export const useUserStore = defineStore('user', () => {
     userId,
     fullName,
     logout,
-    checkToken,
     setToken,
     setUserId,
+    checkToken,
+    getUserById,
+    registration,
     authenticate,
     isAuthenticated,
-    getUserById,
   };
 });
