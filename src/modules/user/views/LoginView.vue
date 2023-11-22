@@ -18,7 +18,6 @@
             type="email"
             label="Email"
             v-model="user.email"
-            :rules="validateEmail"
           />
           <ErrorMessage name="email" as="p">
             <p

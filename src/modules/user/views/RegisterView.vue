@@ -2,12 +2,12 @@
   <div class="flex flex-col justify-center min-h-full py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <img
-        class="w-auto h-12 mx-auto"
-        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+        class="w-auto h-24 mx-auto"
+        src="@/assets/logofilled.png"
         alt="Workflow"
       />
       <h2 class="mt-6 text-3xl font-extrabold text-center text-white">
-        Cadastro de usuário
+        Cadastro Usuário
       </h2>
     </div>
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
