@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://startup-one-production.up.railway.app/api/v1',
+  baseURL: 'https://startup-one-production.up.railway.app/api',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
-export default axiosInstance
+export default axiosInstance;
