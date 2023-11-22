@@ -1,19 +1,3 @@
-<!--
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
@@ -65,12 +49,13 @@
                 </button>
               </div>
             </TransitionChild>
-            <div class="flex items-center flex-shrink-0 px-4">
+            <div class="flex items-center flex-shrink-0 gap-4 px-4">
               <img
                 class="w-auto h-8"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
+                src="@/assets/logofilledWhite.png"
                 alt="Workflow"
               />
+              <h2 class="text-lg font-bold text-white">Needles Signals</h2>
             </div>
             <div class="flex-1 h-0 mt-5 overflow-y-auto">
               <nav class="px-2 space-y-1">
@@ -106,12 +91,13 @@
     <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-indigo-700">
-        <div class="flex items-center flex-shrink-0 px-4">
+        <div class="flex items-center flex-shrink-0 gap-2 px-4">
           <img
-            class="w-auto h-8"
-            src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-            alt="Workflow"
+            class="w-auto h-10"
+            src="@/assets/logofilledWhite.png"
+            alt="needlessignalslogo"
           />
+          <h2 class="text-lg font-bold text-white">Needles Signals</h2>
         </div>
         <div class="flex flex-col flex-1 mt-5">
           <nav class="flex-1 px-2 pb-4 space-y-1">
